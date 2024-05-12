@@ -1,5 +1,7 @@
 import UrlPattern from "url-pattern";
+import { platform } from "node:os";
 import { loadJSON } from "./sub/loadFromFs.js";
+
 const config = loadJSON("./src/config.json");
 const packageJson = loadJSON("./package.json");
 const servicesConfigJson = loadJSON("./src/modules/processing/servicesConfig.json");
@@ -35,6 +37,7 @@ const
         cookiePath: process.env.COOKIE_PATH,
         processingPriority: process.env.PROCESSING_PRIORITY && parseInt(process.env.PROCESSING_PRIORITY),
         tiktokDeviceInfo: process.env.TIKTOK_DEVICE_INFO && JSON.parse(process.env.TIKTOK_DEVICE_INFO),
+        freebindCIDR: platform() === 'linux' && process.env.FREEBIND_CIDR,
         apiURL
     }
 
